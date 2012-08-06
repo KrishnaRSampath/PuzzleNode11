@@ -7,7 +7,7 @@ def simple_water_fill(cave, count, row, col)
   cave_above = cave[row-1][col]
 #  puts
 #  puts 'Count is currently '+count.to_s
-  return cave if count <= 0
+  return cave if count == 1
 
   if cave_below && cave_below == ' ' then
 #    puts "Below is empty.  Now I'm flowing down!"
@@ -19,7 +19,7 @@ def simple_water_fill(cave, count, row, col)
     cave[row][col+1] = '~'
     simple_water_fill(cave, count-1, row, col+1)
   elsif cave_above && cave[row-1][col] == ' ' #below and forward BOTH filled -- try above me
-      #FLOW UPWARDS
+    #FLOW UPWARDS
     col = col-1 while cave[row-1][col] == ' ' #should go all the way to the back
     simple_water_fill(cave, count, row-1, col)
   else
@@ -47,7 +47,7 @@ def print_cave(cave)
 end
 
 
-rows = File.readlines("simple_cave.txt")
+rows = File.readlines("complex_cave.txt")
 count = rows[0].to_i
 last_row = rows.length-1
 cave = []
@@ -56,7 +56,7 @@ rows[2..last_row].each do |row|
 end
 numcols = cave[0].length
 
-simple_water_fill(cave, 100, 1, 0)
+simple_water_fill(cave, count, 1, 0)
 print_cave(cave)
 
 
@@ -74,47 +74,5 @@ numcols.times do |col|
   print value.to_s + " "
 end
 
-
-=begin
-cave[0].length.times do |i|
-    y = 0
-    cave.length.times do |x|
-        if cave[x][i]==' ' && y > 0 then # incomplete flow
-            y="~"
-            break
-        end
-        y=y+1 if cave[x][i]=='~'
-    end
-    print y.to_s + " "
-end
-=end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=begin
-cave.each do |row|
-  row.each do |cell|
-    print cell
-  end
-  print "\n"
-end
-=end
 
 
