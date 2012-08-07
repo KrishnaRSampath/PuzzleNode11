@@ -24,8 +24,8 @@
 
 
 #Initial Definitions:
-#rows = File.readlines("simple_cave.txt") # Uncomment this line to see the simple example.
-rows = File.readlines("complex_cave.txt") # But be sure to comment this one out if you do!
+rows = File.readlines("simple_cave.txt") # Uncomment this line to see the simple example.
+#rows = File.readlines("complex_cave.txt") # But be sure to comment this one out if you do!
 count = rows[0].to_i    # The first line is how much water to use.
 last_row = rows.length-1
 
@@ -33,13 +33,6 @@ cave = []
 rows[2..last_row].each do |row|
   cave << row.chomp.split('')
 end
-
-numcols = cave[0].length
-
-simple_water_fill(cave, count, 1, 0)
-#print_cave(cave)
-output(cave)
-
 
 
 
@@ -53,15 +46,15 @@ def simple_water_fill(cave, count, row, col)
   return cave if count == 1      # I had it set up to terminate at count == 0, but this 
                                  # produced the dreaded "Off By One" problem in my fill.
 
-  if cave_below && cave_below == ' ' then   # Flows down if cell below is empty.
+  if cave_below == ' ' then   # Flows down if cell below is empty.
     cave[row+1][col] = '~'
     simple_water_fill(cave, count-1, row+1, col)
 
-  elsif next_cave && cave[row][col+1] == ' ' then # below filled, forward empty
+  elsif cave[row][col+1] == ' ' then # below filled, forward empty
     cave[row][col+1] = '~'
     simple_water_fill(cave, count-1, row, col+1)
 
-  elsif cave_above && cave[row-1][col] == ' ' #below and forward BOTH filled -- checks up.
+  elsif cave[row-1][col] == ' ' #below and forward BOTH filled -- checks up.
     col = col-1 while cave[row-1][col] == ' ' #should go all the way to the back
     simple_water_fill(cave, count, row-1, col)
 
@@ -91,7 +84,7 @@ end
 
 # This procedure prints out the single line output to the screen.
 def output(cave)
-  numcols.times do |col|
+  cave[0].length.times do |col|
     value = 0
     cave.length.times do |row|
       if cave[row][col] == ' ' && value > 0 then
@@ -104,7 +97,12 @@ def output(cave)
     end
     print value.to_s + " "
   end
+end
 
+# Function Calls:
+simple_water_fill(cave, count, 1, 0)
+print_cave(cave)
+#output(cave)
 
 
 
