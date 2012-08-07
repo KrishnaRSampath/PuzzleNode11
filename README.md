@@ -7,7 +7,7 @@ This is my solution to Puzzle Node Problem #11 -- "Hitting Rock Bottom"
 RELEVANT FILES:  
 refactored_midterm.rb -- The most up-to-date (and working!) version of my code.  
 
-k\_midterm.rb -- not as elegant, and after I commented, I broke it. 
+k\_midterm.rb -- not as elegant, and after I commented the code, it broke.  
 new.rb -- first version of my code that worked and generated the correct output  
 (Succeeded on first submission to PuzzleNode, but it is messy coding.)  
 complex_output.txt -- What my code generates as output  
